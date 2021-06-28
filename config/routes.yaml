@@ -5,6 +5,7 @@ index:
 url_store:
     path: /store/url
     controller: App\Controller\ShortnerController::store
+    methods: POST
 
 shorty_redirect:
     path: /{shorty_url}
