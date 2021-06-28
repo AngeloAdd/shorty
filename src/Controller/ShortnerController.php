@@ -46,7 +46,13 @@ class ShortnerController extends AbstractController
 
         $entityManager->flush();
 
-        $this->addFlash('success', 'Shorty ha fatto il suo!');
+        $shortenedURL = $this->getParameter('app.URL') . $newShortyUri;
+        $this->addFlash('success', "Shorty ha fatto il suo! Ecco il tuo url $shortenedURL");
         return $this->redirectToRoute('index');
+    }
+
+    public function redirectToStoredUrl(Shortner $url)
+    {
+        return $this->redirect($url->getUrl());
     }
 }

@@ -8,4 +8,4 @@ url_store:
 
 shorty_redirect:
     path: /{shorty_url}
-    controller: App\Controller\ShortnerController::redirect
+    controller: App\Controller\ShortnerController::redirectToStoredUrl
