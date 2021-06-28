@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+    {% block style %}
+        <style>
+            *, *::before, *::after{
+                box-sizing: border-box;
+            }
+
+            body{
+                margin: 0;
+                background: linear-gradient(to right, #94c376, #e0db4c);
+            }
+
+            .flexbox{
+                display: flex;
+                width: 100%;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+
+            .flexbox-heading-style{
+                color: slategrey;
+                font-size: 3rem;
+            }
+
+            .formbox{
+                border: 1px solid slategrey;
+                padding: 2rem;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                background: linear-gradient(to right, #636b58, #826c9b);
+            }
+
+            .formbox-label-style{
+                color: darkblue;
+                font-size: .8rem;
+            }
+
+            .formbox-input-style{
+                border-radius: 4%;
+                height: 2rem;
+                padding: .4rem;
+                border: 1px solid slategrey;
+                margin: .4rem 0 .4rem 0;
+
+            }
+
+            .formbox-btn-style{
+                background: darkblue;
+                color: whitesmoke;
+                border-radius: .4rem;
+                border: 1px solid  slategrey;
+                width: 60%;
+                height: 10%;
+                padding: .4rem 1.1rem;
+            }
+
+            .errorslist{
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .errorslist-error-style{
+                color: yellow;
+                padding: 1.4rem 0 0 0;
+            }
+            
+        </style> 
+    {% endblock %}
+
+{% block body %}
+
+    <div class="flexbox">
+        <h1 class="flexbox-heading-style">Hello Shorty User</h1>
+        <div class="formbox">
+            <form method="POST" action="{{ url('url_store') }}">
+                <label for="url" class="formbox-label-style">Inserisci URL da Accorciare</label>
+                <input class="formbox-input-style" type="text" id="url" name="url" placeholder="URL">
+                <button class="formbox-btn-style" type="submit">Vai Shorty</button>
+            </form>
+
+            {%- for errors in app.session.flashbag.get('errors') -%}
+                    <ul class="errorslist">
+                        {%- for error in errors -%}
+
+                            <li class="errorslist-error-style">{{ error.message }}</li>
+                        {%- endfor -%}
+                    </ul>
+            {%- endfor -%}
+            {%- for message in app.session.flashbag.get('success') -%}
+                <ul class="errorslist">
+                    <li class="errorslist-error-style">{{ message }}</li>
+                </ul>
+            {%- endfor -%}
+
+        </div>
+    </div>
+
+{% endblock %}
